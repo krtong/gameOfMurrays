@@ -1,6 +1,11 @@
 //global variables
 let wins, losses, score, goal;
+
 let numOfMurrays = 5; //changing this may make the game run a bit slow....
+let goalRange = [50, 100]; //changing this will change the range of goals
+let murrayValueRange = [1, 10]; //changing this range will change the range of murray values.
+let [mMin, mMax] = murrayValueRange;
+let [gMin, gMax] = goalRange;
 
 //helper functions
 const randomNum = (min, max) => Math.floor(min + Math.random() * (max - min));
@@ -10,7 +15,7 @@ const createMurrays = () => { //behold, my creation.
     let html = "";
 
     while (murrayValues.length < numOfMurrays) { //create numbers unique to each Murray, no duplicates.
-        let randomValue = randomNum(1, numOfMurrays + 5);
+        let randomValue = randomNum(mMin, numOfMurrays + mMax);
         if (murrayValues.indexOf(randomValue) === -1) murrayValues.push(randomValue);
     }
 
@@ -39,13 +44,13 @@ const initializeClickHandlers = () => {
 
     $("#reset").click(function () {
         $("#message").empty();
-        displayScoreBoard(0, randomNum(50, 100), wins, losses);
+        displayScoreBoard(0, randomNum(gMin, gMax), wins, losses);
         createMurrays(numOfMurrays);
     });
 
     $(".murray").click(function () {
-        let secretMurphyValue = parseInt($(this)[0].attributes[2].value); //fucky workaround
-        score = score + secretMurphyValue;
+        let secretMurrayValue = parseInt($(this)[0].attributes[2].value); //fucky workaround
+        score = score + secretMurrayValue;
 
         if (score > goal) {
             $("#div-of-murrays").empty();
@@ -63,5 +68,5 @@ const initializeClickHandlers = () => {
     });
 };
 
-displayScoreBoard(0, randomNum(50, 100), 0, 0);
+displayScoreBoard(0, randomNum(gMin, gMax), 0, 0);
 createMurrays(numOfMurrays);
