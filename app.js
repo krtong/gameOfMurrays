@@ -14,16 +14,16 @@ const createMurrays = () => { //behold, my creation.
     let murrayValues = [];
     let html = "";
 
-    while (murrayValues.length < numOfMurrays) { //create numbers unique to each Murray, no duplicates.
+    while (murrayValues.length < numOfMurrays) { 
         let randomValue = randomNum(mMin, numOfMurrays + mMax);
-        if (murrayValues.indexOf(randomValue) === -1) murrayValues.push(randomValue);
+        if (murrayValues.indexOf(randomValue) === -1) murrayValues.push(randomValue); //create numbers unique to each Murray, no duplicates.
     }
 
-    for (let i = 0; i < numOfMurrays; i++) { //makes the game load hella slow but it's fun: random murray image generator.
+    for (let i = 0; i < numOfMurrays; i++) { 
         let value = murrayValues[i];
         let width = randomNum(120, 150);
         let height = randomNum(170, 200);
-        let imgSrc = `https://www.fillmurray.com/${width}/${height}`;
+        let imgSrc = `https://www.fillmurray.com/${width}/${height}`; //makes the game load hella slow but it's fun: random murray image generator.
 
         html += `<img src="${imgSrc}" class="murray" value="${value}">`
     }
